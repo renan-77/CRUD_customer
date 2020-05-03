@@ -48,50 +48,34 @@
 					<span class="login100-form-title-1">
 						C.R.U.D Customer System Create.
 					</span>
-				</div>
-
-                <p><?php
-                    function getUserData(){
-
-                        $dbuser = "root";
-                        $dbaddress = "localhost";
-                        $dbpass = "renan000";
-                        $dbname = "customerSystem";
-                        $conn = new mysqli($dbaddress, $dbuser, $dbpass, $dbname);
-
-                        if(isset($_POST['usr'])){
-                            $usrname = $_POST['usr'];
-                            $query = "SELECT * FROM customers WHERE CustName = '$usrname'";
-                            $result = mysqli_query($conn, $query) or die(mysqli_error($conn));
-                            while($row = mysqli_fetch_array($result)) {
-                                // echo "Customer ID: $row[0] ";
-                                // echo "Customer NAME: $row[1] ";
-                                // echo "Customer EMAIL: $row[2] ";
-                                // echo "Customer PHONE: $row[3] ";
-                                // echo "Customer ADDRESS: $row[4] ";
-                                return $row;
-                            }
-                        }if(isset($_POST['usrid'])){
-                            $usrid = $_POST['usrid'];
-                            $query = "SELECT * FROM customers WHERE CustID = $usrid";
-                            $result = mysqli_query($conn, $query) or die(mysqli_error($conn));
-                            while($row = mysqli_fetch_array($result)) {
-                                // echo "Customer ID: $row[0] ";
-                                // echo "Customer NAME: $row[1] ";
-                                // echo "Customer EMAIL: $row[2] ";
-                                // echo "Customer PHONE: $row[3] ";
-                                // echo "Customer ADDRESS: $row[4] ";
-                                return $row;
-                            }
-                        } 
-                    }
-                ?></p>
-
+                </div>
+                
                 <p class="align">PLEASE INSERT DATA FOR NEW USER</p>
                 <?php
+                    $dbuser = "root";
+                    $dbaddress = "localhost";
+                    $dbpass = "renan000";
+                    $dbname = "customerSystem";
+                    $conn = new mysqli($dbaddress, $dbuser, $dbpass, $dbname);
+
                     if(isset($_POST['create'])) {  
-                        if(isset($_POST['usrname']) and isset($_POST['usremail']) and isset($_POST['usrphone']) and isset($_POST['usraddress'])){
-                            echo '<p style="text-align: center; color: blue">Successfuly inserted</p>';
+                        if($_POST['usrname'] != "" && $_POST['usremail'] != "" && $_POST['usrphone'] != "" && $_POST['usraddress'] != ""){
+                            if(strpos($_POST['usremail'],'@') === false || strpos($_POST['usremail'],'.') === false){
+                                echo '<p style="text-align: center; color: red">Please insert a valid email</p>';
+                            }else if(!ctype_digit($_POST['usrphone'])){
+                                echo '<p style="text-align: center; color: red">Please insert a valid phone</p>';
+                            }else{
+                                $usrname = $_POST['usrname'];
+                                $usremail = $_POST['usremail'];
+                                $usrphone = $_POST['usrphone'];
+                                $usraddress = $_POST['usraddress'];
+
+                                $query = "INSERT INTO customers(CustName,CustEmail,CustPhone,CustAddress) VALUES('$usrname','$usremail','$usrphone','$usraddress');";
+
+                                $result = mysqli_query($conn, $query) or die(mysqli_error($conn));
+
+                                echo '<p style="text-align: center; color: blue">Successfuly inserted</p>';
+                            }
                         }else{
                             echo '<p style="text-align: center; color: red">Please insert data in all fields</p>';
                         }

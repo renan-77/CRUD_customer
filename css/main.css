@@ -46,7 +46,7 @@ a {
 	font-family: Poppins-Regular;
 	font-size: 14px;
 	line-height: 1.7;
-	color: #666666;
+	color: #bbbbbb;
 	margin: 0px;
 	transition: all 0.4s;
 	-webkit-transition: all 0.4s;
@@ -69,10 +69,10 @@ h1,h2,h3,h4,h5,h6 {
 }
 
 p {
-	font-family: Poppins-Regular;
+  font-family: Poppins-Bold;
 	font-size: 14px;
 	line-height: 1.7;
-	color: #666666;
+	color: #44ff83;
 	margin: 0px;
 }
 
@@ -181,6 +181,9 @@ iframe {
   background: #ebeeef;
 }
 
+.hide{
+  display: none;
+}
 
 .wrap-login100 {
   width: 670px;
@@ -429,7 +432,7 @@ input.input100 {
   height: 50px;
   background-color: #57b846;
   border-radius: 6px;
-  margin: 0 auto;
+  margin: 0 0 4px 0;
   font-family: Poppins-Regular;
   font-size: 16px;
   color: #fff;
@@ -450,6 +453,15 @@ input.input100 {
   display: block;
   margin: 0 auto;
   padding: 5% 0 5% 0;
+  background-color: #008ab4b2;
+  color: #f1f1f1;
+}
+
+.align2{
+  text-align: center;
+  display: block;
+  margin: 0 auto;
+  padding: 20px 0 0 0;
   background-color: #2d2d2d67;
   color: #f1f1f1;
 }

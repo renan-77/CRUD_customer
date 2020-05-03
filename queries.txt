@@ -52,24 +52,35 @@ if(isset($_POST['usr'])){
 
 <div class="wrap-input100 validate-input m-b-18" data-validate = "Name is required">
         <p>NAME</p>
-        <input class="input101" type="text" name="usrid" placeholder="PLEASE INSERT NAME">
+        <input class="input101" type="text" name="usrname" placeholder="PLEASE INSERT NAME">
         <span class="focus-input100"></span>
     </div>
 
     <div class="wrap-input100 validate-input m-b-18" data-validate = "Email is required">
         <p>EMAIL</p>
-        <input class="input101" type="text" name="usrid" placeholder="PLEASE INSERT EMAIL">
+        <input class="input101" type="text" name="usremail" placeholder="PLEASE INSERT EMAIL">
         <span class="focus-input100"></span>
     </div>
 
     <div class="wrap-input100 validate-input m-b-18" data-validate = "Phone is required">
         <p>PHONE</p>
-        <input class="input101" type="text" name="usrid" placeholder="PLEASE INSERT PHONE">
+        <input class="input101" type="text" name="usrphone" placeholder="PLEASE INSERT PHONE">
         <span class="focus-input100"></span>
     </div>
     
     <div class="wrap-input100 validate-input m-b-18" data-validate = "Address is required">
         <p>ADDRESS</p>
-        <input class="input101" type="text" name="usrid" placeholder="PLEASE INSERT ADDRESS">
+        <input class="input101" type="text" name="usraddress" placeholder="PLEASE INSERT ADDRESS">
         <span class="focus-input100"></span>
 </div>                 
+
+
+$usrid = $_POST['usrid'];
+$usrname = $_POST['usrname'];
+$usremail = $_POST['usremail'];
+$usrphone = $_POST['usrphone'];
+$usraddress = $_POST['usraddress'];
+
+$query = "UPDATE customers SET CustNAme='$usrname', CustEmail='$usremail', CustPhone='$usrphone', CustAddress='$usraddress' WHERE CustID=$usrid";
+
+$result = mysqli_query($conn, $query) or die(mysqli_error($conn));

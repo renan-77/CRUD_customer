@@ -39,68 +39,94 @@
                     echo "Please login to access this page!";
                     header('Location: index.php');
                 }
+                
+                if(isset($_POST['back'])){
+                    header("Location: main.php");
+                }
 
-                if(isset($_POST['search'])){
-                    header("Location: search.php");
-                }if(isset($_POST['create'])){
-                    header("Location: create.php");
-                }if(isset($_POST['update'])){
-                    header("Location: update.php");
-                }if(isset($_POST['delete'])){
-                    header("Location: delete.php");
+                function getUserData(){
+
+                    $dbuser = "root";
+                    $dbaddress = "localhost";
+                    $dbpass = "renan000";
+                    $dbname = "customerSystem";
+                    $conn = new mysqli($dbaddress, $dbuser, $dbpass, $dbname);
+
+                    if(isset($_POST['usrid'])){
+                        $usrid = $_POST['usrid'];
+                        $query = "SELECT * FROM customers WHERE CustID = $usrid";
+                        $result = mysqli_query($conn, $query) or die(mysqli_error($conn));
+                        while($row = mysqli_fetch_array($result)) {
+                            // echo "Customer ID: $row[0] ";
+                            // echo "Customer NAME: $row[1] ";
+                            // echo "Customer EMAIL: $row[2] ";
+                            // echo "Customer PHONE: $row[3] ";
+                            // echo "Customer ADDRESS: $row[4] ";
+                            return $row;
+                        }
+                    } 
                 }
             ?>
 				<div class="login100-form-title" style="background-image: url(images/bg-01.jpg);">
 					<span class="login100-form-title-1">
-						C.R.U.D Customer System Main Page.
+						C.R.U.D Customer System Delete.
 					</span>
-				</div>
+                </div>
+                
+                <p class="align">PLEASE INSERT ID TO CHANGE</p>
 
-				<!-- <form class="login100-form validate-form" method="post">
-					<div class="wrap-input100 validate-input m-b-26" data-validate="Username is required">
-						<span class="label-input100">Username</span>
-						<input class="input100" type="text" name="username" placeholder="Enter username">
-						<span class="focus-input100"></span>
-					</div>
+                <form class="login101-form validate-form" method="post">
+                    <p>USER ID</p>
+                    <input class="input101" type="text" name="usrid" placeholder="Enter USER ID">
+                    <span class="focus-input100"></span>
+                
+                    <input class="login100-form-btn" type="submit" name="back" value="BACK">
+                    <input class="login100-form-btn" type="submit" name="search" value="SEARCH"> 
+                </form>
+                <p class="align">QUERY RESULTS:</p>
+                <?php
+                    $dbuser = "root";
+                    $dbaddress = "localhost";
+                    $dbpass = "renan000";
+                    $dbname = "customerSystem";
+                    $conn = new mysqli($dbaddress, $dbuser, $dbpass, $dbname);
 
-					<div class="wrap-input100 validate-input m-b-18" data-validate = "Password is required">
-						<span class="label-input100">Password</span>
-						<input class="input100" type="password" name="pass" placeholder="Enter password">
-						<span class="focus-input100"></span>
-					</div> -->
-                    <form method="post"> 
-                        <div class="align">
-                            <input class="login100-form-btn" type="submit" name="search" value="SEARCH"> 
-                            <input class="login100-form-btn" type="submit" name="create" value="CREATE"><br>
-                            <input class="login100-form-btn" type="submit" name="update" value="UPDATE">
-                            <input class="login100-form-btn" type="submit" name="delete" value="DELETE">
-                        </div>
-                    </form>
+                    if(isset($_POST['delete'])) {  
+                        $usrid = $_POST['usrid'];
+                        $usrname = $_POST['usrname'];
+                        $usremail = $_POST['usremail'];
+                        $usrphone = $_POST['usrphone'];
+                        $usraddress = $_POST['usraddress'];
 
-                    <!-- <div class="container-login100-form-btn">
-						<button class="login100-form-btn">
-							Search
-						</button>
-                    </div>
+                        $query = "DELETE FROM customers WHERE CustID=$usrid";
+
+                        $result = mysqli_query($conn, $query) or die(mysqli_error($conn));
+
+                        echo '<p style="text-align: center; color: blue">Successfuly Deleted</p>';
+                    }
+                ?>
+                <form class="login101-form" method="post">
+                    <input class="hide" type="text" name="usrid" value=<?php echo getUserData()[0]; ?>>
+                    <p>NAME</p>
+                    <input class="input101" type="text" readonly name="usrname" value=<?php echo getUserData()[1]; ?>>
+                    <span class="focus-input100"></span>
                     
-                    <div class="container-login100-form-btn">
-						<button class="login100-form-btn">
-							Create
-						</button>
-                    </div>
+                    <p>EMAIL</p>
+                    <input class="input101" type="text" readonly name="usremail" value=<?php echo getUserData()[2]; ?>>
+                    <span class="focus-input100"></span>
+
+                    <p>PHONE</p>
+                    <input class="input101" type="text" readonly name="usrphone" value=<?php echo getUserData()[3]; ?>>
+                    <span class="focus-input100"></span>
                     
-                    <div class="container-login100-form-btn">
-						<button class="login100-form-btn">
-							Update
-						</button>
-                    </div>
-                    
-                    <div class="container-login100-form-btn">
-						<button class="login100-form-btn">
-							DELETE
-						</button> -->
-					</div>
-				</form>
+                    <p>ADDRESS</p>
+                    <input class="input101" type="text" readonly name="usraddress" value=<?php echo getUserData()[4]; ?>>
+                    <span class="focus-input100"></span>
+
+                    <p style="text-align: center; color: red">ARE YOU SURE YOU WANT TO DELETE THIS USER?</p>
+
+                    <input class="login100-form-btn" type="submit" name="delete" value="CONFIRM">
+                </form>
 			</div>
 		</div>
 	</div>

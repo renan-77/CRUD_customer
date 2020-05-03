@@ -47,3 +47,29 @@ if(isset($_POST['usr'])){
                         echo print_r($row);       // Print the entire row data
                     }
                 }
+
+
+
+<div class="wrap-input100 validate-input m-b-18" data-validate = "Name is required">
+        <p>NAME</p>
+        <input class="input101" type="text" name="usrid" placeholder="PLEASE INSERT NAME">
+        <span class="focus-input100"></span>
+    </div>
+
+    <div class="wrap-input100 validate-input m-b-18" data-validate = "Email is required">
+        <p>EMAIL</p>
+        <input class="input101" type="text" name="usrid" placeholder="PLEASE INSERT EMAIL">
+        <span class="focus-input100"></span>
+    </div>
+
+    <div class="wrap-input100 validate-input m-b-18" data-validate = "Phone is required">
+        <p>PHONE</p>
+        <input class="input101" type="text" name="usrid" placeholder="PLEASE INSERT PHONE">
+        <span class="focus-input100"></span>
+    </div>
+    
+    <div class="wrap-input100 validate-input m-b-18" data-validate = "Address is required">
+        <p>ADDRESS</p>
+        <input class="input101" type="text" name="usrid" placeholder="PLEASE INSERT ADDRESS">
+        <span class="focus-input100"></span>
+</div>                 

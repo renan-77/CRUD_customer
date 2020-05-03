@@ -46,7 +46,7 @@
             ?>
 				<div class="login100-form-title" style="background-image: url(images/bg-01.jpg);">
 					<span class="login100-form-title-1">
-						C.R.U.D Customer System Search.
+						C.R.U.D Customer System Create.
 					</span>
 				</div>
 
@@ -87,41 +87,35 @@
                     }
                 ?></p>
 
-                <p class="align">PLEASE INSERT EITHER ID OR USERNAME FOR SEARCH</p>
-
-				<form class="login101-form validate-form" method="post">
-						<p>USER ID</p>
-						<input class="input101" type="text" name="usrid" placeholder="Enter USER ID">
-						<span class="focus-input100"></span>
-
-						<p>USERNAME</p>
-						<input class="input101" type="text" name="usr" placeholder="Enter USERNAME">
-						<span class="focus-input100"></span>
-                    
-                            <input class="login100-form-btn" type="submit" name="back" value="BACK">
-                            <input class="login100-form-btn" type="submit" name="search" value="SEARCH"> 
-                </form>
-                <p class="align">QUERY RESULTS:</p>
-                <form id="searchResults" class="login101-form">
-                    <p>ID</p>
-                    <input class="input101" type="text" readonly name="usrid" value=<?php echo getUserData()[0]; ?>>
-                    <span class="focus-input100"></span>
-
+                <p class="align">PLEASE INSERT DATA FOR NEW USER</p>
+                <?php
+                    if(isset($_POST['create'])) {  
+                        if(isset($_POST['usrname']) and isset($_POST['usremail']) and isset($_POST['usrphone']) and isset($_POST['usraddress'])){
+                            echo '<p style="text-align: center; color: blue">Successfuly inserted</p>';
+                        }else{
+                            echo '<p style="text-align: center; color: red">Please insert data in all fields</p>';
+                        }
+                    }
+                ?>
+                <form class="login101-form" method="post">
                     <p>NAME</p>
-                    <input class="input101" type="text" readonly name="usrid" value=<?php echo getUserData()[1]; ?>>
+                    <input class="input101" type="text" name="usrname" placeholder="PLEASE INSERT NAME">
                     <span class="focus-input100"></span>
                     
                     <p>EMAIL</p>
-                    <input class="input101" type="text" readonly name="usrid" value=<?php echo getUserData()[2]; ?>>
+                    <input class="input101" type="text" name="usremail" placeholder="PLEASE INSERT EMAIL">
                     <span class="focus-input100"></span>
 
                     <p>PHONE</p>
-                    <input class="input101" type="text" readonly name="usrid" value=<?php echo getUserData()[3]; ?>>
+                    <input class="input101" type="text" name="usrphone" placeholder="PLEASE INSERT PHONE">
                     <span class="focus-input100"></span>
                     
                     <p>ADDRESS</p>
-                    <input class="input101" type="text" readonly name="usrid" value=<?php echo getUserData()[4]; ?>>
+                    <input class="input101" type="text" name="usraddress" placeholder="PLEASE INSERT ADDRESS">
                     <span class="focus-input100"></span>
+                                        
+                    <input class="login100-form-btn" type="submit" name="back" value="BACK">
+                    <input class="login100-form-btn" type="submit" name="create" value="CREATE"> 
                 </form>
 			</div>
 		</div>

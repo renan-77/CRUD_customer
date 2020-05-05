@@ -33,35 +33,42 @@
 		<div class="container-login100">
 			<div class="wrap-login100">
             <?php
+				//Starting session.
                 session_start();
 
+				//Creating variables to store connection data.
                 $dbuser = "root";
                 $dbaddress = "localhost";
                 $dbpass = "renan000";
                 $dbname = "customerSystem";
                 $conn = new mysqli($dbaddress, $dbuser, $dbpass, $dbname);
 
+				//Creating session boolean to verify login in pages that it is needed to be logged in.
                 $_SESSION['auth'] = false;
-                
+				
+				//Checking if fields are set.
                 if(isset($_POST['username']) and isset($_POST['pass'])){
                     $username = $_POST['username'];
                     $password = $_POST['pass'];
 
+					//Checking if user is in database.
                     $query = "SELECT * FROM users WHERE username = '$username' and userpassword = '$password'";
                     $result = mysqli_query($conn, $query) or die(mysqli_error($conn));
                     $count = mysqli_num_rows($result);
 
+					//Activating auth variable if login is successful.
                     if($count == 1){
                         $_SESSION['auth'] = true;
                     }
 
                 }
 
+				//Doing action in case login is successful.
                 if($_SESSION['auth'] == true){
                     echo "Login Successful, redirecting...";
                     header('Location: main.php');
                 }else{
-                    echo "Wrong credentials.";
+
                 }
 
             ?>

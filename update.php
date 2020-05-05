@@ -33,17 +33,21 @@
 		<div class="container-login100">
 			<div class="wrap-login100">
             <?php
+                //Starting Session.
                 session_start();
 
+                //Checking login.
                 if($_SESSION['auth'] == false){
                     echo "Please login to access this page!";
                     header('Location: index.php');
                 }
                 
+                //Button back
                 if(isset($_POST['back'])){
                     header("Location: main.php");
                 }
 
+                //Get user data function.
                 function getUserData(){
 
                     $dbuser = "root";
@@ -91,13 +95,16 @@
                     $dbname = "customerSystem";
                     $conn = new mysqli($dbaddress, $dbuser, $dbpass, $dbname);
 
-                    if(isset($_POST['update'])) {  
+                    //Update.
+                    if(isset($_POST['update'])) { 
+                        //Verifying inputs. 
                         if($_POST['usrname'] != "" && $_POST['usremail'] != "" && $_POST['usrphone'] != "" && $_POST['usraddress'] != ""){
                             if(strpos($_POST['usremail'],'@') === false || strpos($_POST['usremail'],'.') === false){
                                 echo '<p style="text-align: center; color: red">Please insert a valid email</p>';
                             }else if(!ctype_digit($_POST['usrphone'])){
                                 echo '<p style="text-align: center; color: red">Please insert a valid phone</p>';
                             }else{
+                                //Running query.
                                 $usrid = $_POST['usrid'];
                                 $usrname = $_POST['usrname'];
                                 $usremail = $_POST['usremail'];

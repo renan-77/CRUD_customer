@@ -34,12 +34,12 @@
 			<div class="wrap-login100">
             <?php
                 session_start();
-
+                //Checking login.
                 if($_SESSION['auth'] == false){
                     echo "Please login to access this page!";
                     header('Location: index.php');
                 }
-                
+                //Back action.
                 if(isset($_POST['back'])){
                     header("Location: main.php");
                 }
@@ -52,6 +52,7 @@
                     $dbname = "customerSystem";
                     $conn = new mysqli($dbaddress, $dbuser, $dbpass, $dbname);
 
+                    //Retrieving data by userID
                     if(isset($_POST['usrid'])){
                         $usrid = $_POST['usrid'];
                         $query = "SELECT * FROM customers WHERE CustID = $usrid";
@@ -73,7 +74,7 @@
 					</span>
                 </div>
                 
-                <p class="align">PLEASE INSERT ID TO CHANGE</p>
+                <p class="align">PLEASE INSERT ID TO DELETE</p>
 
                 <form class="login101-form validate-form" method="post">
                     <p>USER ID</p>
@@ -91,6 +92,7 @@
                     $dbname = "customerSystem";
                     $conn = new mysqli($dbaddress, $dbuser, $dbpass, $dbname);
 
+                    //Delete data.
                     if(isset($_POST['delete'])) {  
                         $usrid = $_POST['usrid'];
                         $usrname = $_POST['usrname'];
@@ -106,21 +108,21 @@
                     }
                 ?>
                 <form class="login101-form" method="post">
-                    <input class="hide" type="text" name="usrid" value=<?php echo getUserData()[0]; ?>>
+                    <input class="hide" type="text" name="usrid" value=<?php echo getUserData()[0]; //Displaying data from query ?>>
                     <p>NAME</p>
-                    <input class="input101" type="text" readonly name="usrname" value=<?php echo getUserData()[1]; ?>>
+                    <input class="input101" type="text" readonly name="usrname" value=<?php echo getUserData()[1]; //Displaying data from query?>>
                     <span class="focus-input100"></span>
                     
                     <p>EMAIL</p>
-                    <input class="input101" type="text" readonly name="usremail" value=<?php echo getUserData()[2]; ?>>
+                    <input class="input101" type="text" readonly name="usremail" value=<?php echo getUserData()[2]; //Displaying data from query?>>
                     <span class="focus-input100"></span>
 
                     <p>PHONE</p>
-                    <input class="input101" type="text" readonly name="usrphone" value=<?php echo getUserData()[3]; ?>>
+                    <input class="input101" type="text" readonly name="usrphone" value=<?php echo getUserData()[3]; //Displaying data from query?>>
                     <span class="focus-input100"></span>
                     
                     <p>ADDRESS</p>
-                    <input class="input101" type="text" readonly name="usraddress" value=<?php echo getUserData()[4]; ?>>
+                    <input class="input101" type="text" readonly name="usraddress" value=<?php echo getUserData()[4]; //Displaying data from query?>>
                     <span class="focus-input100"></span>
 
                     <p style="text-align: center; color: red">ARE YOU SURE YOU WANT TO DELETE THIS USER?</p>

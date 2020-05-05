@@ -33,13 +33,16 @@
 		<div class="container-login100">
 			<div class="wrap-login100">
             <?php
+                //Starting session.
                 session_start();
 
+                //Checking login.
                 if($_SESSION['auth'] == false){
                     echo "Please login to access this page!";
                     header('Location: index.php');
                 }
                 
+                //Back button action.
                 if(isset($_POST['back'])){
                     header("Location: main.php");
                 }
@@ -59,6 +62,7 @@
                         $dbname = "customerSystem";
                         $conn = new mysqli($dbaddress, $dbuser, $dbpass, $dbname);
 
+                        //Query for retrieving user data from username
                         if(isset($_POST['usr'])){
                             $usrname = $_POST['usr'];
                             $query = "SELECT * FROM customers WHERE CustName = '$usrname'";
@@ -71,9 +75,10 @@
                                 // echo "Customer ADDRESS: $row[4] ";
                                 return $row;
                             }
+                        //Query for retrieving user data from userid
                         }if(isset($_POST['usrid'])){
                             $usrid = $_POST['usrid'];
-                            $query = "SELECT * FROM customers WHERE CustID = $usrid";
+                            $query = "SELECT CustID,CustName,CustEmail,CustPhone,CustAddress FROM customers WHERE CustID = $usrid";
                             $result = mysqli_query($conn, $query) or die(mysqli_error($conn));
                             while($row = mysqli_fetch_array($result)) {
                                 // echo "Customer ID: $row[0] ";

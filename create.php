@@ -58,13 +58,16 @@
                     $dbname = "customerSystem";
                     $conn = new mysqli($dbaddress, $dbuser, $dbpass, $dbname);
 
+                    //Create
                     if(isset($_POST['create'])) {  
+                        //Verifying inputs.
                         if($_POST['usrname'] != "" && $_POST['usremail'] != "" && $_POST['usrphone'] != "" && $_POST['usraddress'] != ""){
                             if(strpos($_POST['usremail'],'@') === false || strpos($_POST['usremail'],'.') === false){
                                 echo '<p style="text-align: center; color: red">Please insert a valid email</p>';
                             }else if(!ctype_digit($_POST['usrphone'])){
                                 echo '<p style="text-align: center; color: red">Please insert a valid phone</p>';
                             }else{
+                                //Running insert query.
                                 $usrname = $_POST['usrname'];
                                 $usremail = $_POST['usremail'];
                                 $usrphone = $_POST['usrphone'];
